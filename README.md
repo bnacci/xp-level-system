@@ -2,9 +2,13 @@
 
 A zero-dependency, fully typed TypeScript package for XP-based leveling systems.
 
+🌎 Language:
+- 🇺🇸 English (this document)
+- 🇧🇷 Portuguese: [README.pt-BR.md](./README.pt-BR.md)
+
 ---
 
-## Instalação
+## Installation
 
 ```bash
 npm install xp-level-system
@@ -14,43 +18,43 @@ yarn add xp-level-system
 
 ---
 
-## Quick start
+## Quick Start
 
 ```ts
 import { XPSystem } from "xp-level-system";
 
 const sys = new XPSystem({ baseXP: 100, curve: "quadratic" });
 
-// XP → Nível
+// XP → Level
 const info = sys.getLevelInfo(1000);
 console.log(info.level);           // 4
 console.log(info.progressPercent); // 14%
 
-// Nível → XP total necessário
+// Level → Required total XP
 console.log(sys.xpForLevel(3));    // 400
 ```
 
 ---
 
-## Configuração (`XPSystemConfig`)
+## Configuration (`XPSystemConfig`)
 
-| Opção           | Tipo                   | Padrão        | Descrição                                               |
-|-----------------|------------------------|---------------|---------------------------------------------------------|
-| `baseXP`        | `number`               | `100`         | XP base usado nas fórmulas                              |
-| `multiplier`    | `number`               | `1.5`         | Multiplicador para a curva `exponential`                |
-| `curve`         | `LevelCurve`           | `"quadratic"` | Fórmula de crescimento                                  |
-| `customFormula` | `(level) => number`    | —             | Fórmula própria (obrigatória quando `curve = "custom"`) |
-| `minLevel`      | `number`               | `1`           | Nível mínimo                                            |
-| `maxLevel`      | `number`               | `Infinity`    | Nível máximo (cap)                                      |
+| Option | Type | Default | Description |
+|---------|---------|---------|---------|
+| `baseXP` | `number` | `100` | Base XP used in calculations |
+| `multiplier` | `number` | `1.5` | Multiplier used by the `exponential` curve |
+| `curve` | `LevelCurve` | `"quadratic"` | Growth formula |
+| `customFormula` | `(level) => number` | — | Custom formula (required when `curve = "custom"`) |
+| `minLevel` | `number` | `1` | Minimum level |
+| `maxLevel` | `number` | `Infinity` | Maximum level cap |
 
-### Curvas disponíveis
+### Available Curves
 
-| Curva          | Fórmula (XP acumulado para atingir `level`)          |
-|----------------|------------------------------------------------------|
-| `linear`       | `baseXP × (level − 1)`                               |
-| `quadratic`    | `baseXP × (level − 1)²`                              |
-| `exponential`  | `baseXP × (multiplier^(level−1) − 1)`               |
-| `custom`       | `customFormula(level)`                               |
+| Curve | Formula (total XP required to reach `level`) |
+|---------|---------|
+| `linear` | `baseXP × (level − 1)` |
+| `quadratic` | `baseXP × (level − 1)²` |
+| `exponential` | `baseXP × (multiplier^(level−1) − 1)` |
+| `custom` | `customFormula(level)` |
 
 ---
 
@@ -58,23 +62,23 @@ console.log(sys.xpForLevel(3));    // 400
 
 ### `getLevelInfo(totalXP): LevelInfo`
 
-Retorna um snapshot completo da progressão baseado no XP total acumulado.
+Returns a complete progression snapshot based on accumulated XP.
 
 ```ts
 const info = sys.getLevelInfo(1000);
 
-info.level           // 4      — nível atual
-info.nextLevel       // 5      — próximo nível
-info.totalXP         // 1000   — XP total acumulado
-info.currentXP       // 100    — XP dentro do nível atual
-info.xpToNextLevel   // 700    — XP necessário para passar de nível
-info.progressPercent // 14     — porcentagem (0–100)
-info.isMaxLevel      // false  — se está no nível máximo
+info.level           // 4      — current level
+info.nextLevel       // 5      — next level
+info.totalXP         // 1000   — accumulated XP
+info.currentXP       // 100    — XP within current level
+info.xpToNextLevel   // 700    — XP required to level up
+info.progressPercent // 14     — percentage (0–100)
+info.isMaxLevel      // false  — whether max level has been reached
 ```
 
 ### `xpForLevel(level): number`
 
-Retorna o XP **total acumulado** necessário para *estar* em `level`.
+Returns the **total accumulated XP** required to be at `level`.
 
 ```ts
 sys.xpForLevel(1) // 0
@@ -84,7 +88,7 @@ sys.xpForLevel(5) // 1600
 
 ### `levelFromXP(totalXP): number`
 
-Converte XP total em nível.
+Converts total XP into a level.
 
 ```ts
 sys.levelFromXP(1000) // 4
@@ -93,51 +97,51 @@ sys.levelFromXP(400)  // 3
 
 ### `addXP(currentTotalXP, amount): XPChangeResult`
 
-Adiciona XP e retorna o resultado, incluindo quantos níveis foram ganhos.
+Adds XP and returns the result, including how many levels were gained.
 
 ```ts
 const result = sys.addXP(350, 500);
 
-result.levelInfo      // LevelInfo atualizado
-result.levelsChanged  // +2 (subiu 2 níveis)
+result.levelInfo      // Updated LevelInfo
+result.levelsChanged  // +2 (gained 2 levels)
 result.didLevelUp     // true
 result.xpDelta        // 500
 ```
 
 ### `removeXP(currentTotalXP, amount): XPChangeResult`
 
-Remove XP e retorna o resultado, incluindo quantos níveis foram perdidos.
+Removes XP and returns the result, including how many levels were lost.
 
 ```ts
 const result = sys.removeXP(1500, 700);
 
-result.levelInfo      // LevelInfo atualizado
-result.levelsChanged  // -1 (desceu 1 nível)
+result.levelInfo      // Updated LevelInfo
+result.levelsChanged  // -1 (lost 1 level)
 result.didLevelDown   // true
 result.xpDelta        // -700
 ```
 
 ### `levelUp(currentTotalXP): XPChangeResult`
 
-Promove diretamente o jogador para o próximo nível (útil para ação admin).
-Retorna estado inalterado se já estiver no `maxLevel`.
+Promotes the player directly to the next level (useful for admin actions).
+Returns an unchanged state if already at `maxLevel`.
 
 ```ts
 const result = sys.levelUp(450);
-result.levelInfo.level // 4 (estava em 3)
+result.levelInfo.level // 4 (was level 3)
 ```
 
 ### `xpRequiredForLevel(level): number`
 
-XP necessário **dentro** de um nível específico (delta entre dois thresholds).
+Returns the XP required **within** a specific level (delta between two thresholds).
 
 ```ts
-sys.xpRequiredForLevel(3) // 500  (de 400 até 900)
+sys.xpRequiredForLevel(3) // 500 (from 400 to 900)
 ```
 
 ### `format(info): string`
 
-Formata um `LevelInfo` para exibição amigável.
+Formats a `LevelInfo` object into a user-friendly string.
 
 ```ts
 sys.format(info) // "Level 4 (100 / 700 XP — 14%)"
@@ -145,9 +149,9 @@ sys.format(info) // "Level 4 (100 / 700 XP — 14%)"
 
 ---
 
-## Exemplos de curvas
+## Curve Examples
 
-### Quadratic (padrão)
+### Quadratic (default)
 
 ```
 Level 1 →      0 XP
@@ -188,7 +192,7 @@ const sys = new XPSystem({
 
 ---
 
-## Tipos exportados
+## Exported Types
 
 ```ts
 import type {
@@ -201,15 +205,21 @@ import type {
 
 ---
 
-## Integração com banco de dados
+## Database Integration
 
-Persista apenas o `totalXP` — todos os outros campos são derivados:
+Persist only `totalXP` — every other field is derived from it:
 
 ```ts
-// Salvar
+// Save
 await db.user.update({ totalXP: result.levelInfo.totalXP });
 
-// Carregar
+// Load
 const user = await db.user.findUnique({ where: { id } });
 const info = sys.getLevelInfo(user.totalXP);
 ```
+
+---
+
+## License
+
+[MIT](./LICENSE)
