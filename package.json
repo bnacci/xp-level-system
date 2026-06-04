@@ -1,0 +1,64 @@
+{
+  "name": "xp-level-system",
+  "version": "1.0.0",
+  "description": "A flexible, zero-dependency XP and leveling engine for TypeScript",
+  "author": "Bnacci <eli.bnacci@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/bnacci/xp-level-system#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bnacci/xp-level-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bnacci/xp-level-system/issues"
+  },
+  "keywords": [
+    "xp",
+    "experience",
+    "level",
+    "leveling",
+    "gamification",
+    "rpg",
+    "game",
+    "progression",
+    "typescript"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.build.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run clean && npm run lint && npm test && npm run build",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "clean": "node -e \"require(\\\"fs\\\").rmSync(\\\"dist\\\", {recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "sideEffects": false
+}

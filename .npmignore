@@ -1,0 +1,23 @@
+# Source
+src/
+
+# Config
+tsconfig*.json
+vitest.config.*
+.eslintrc*
+.prettierrc*
+
+# Dev / CI
+.github/
+.husky/
+coverage/
+*.log
+
+# Env / OS
+.env*
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
