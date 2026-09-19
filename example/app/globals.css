@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Rajdhani", var(--font-body), sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+html {
+  background: #05060a;
+}
+
+body {
+  background: radial-gradient(circle at 15% 0%, #1b2140 0%, #05060a 55%) fixed;
+  color: #eef0ff;
+  min-height: 100vh;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3f66 transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3f66;
+  border-radius: 999px;
+}
+
+.panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.xp-bar-track {
+  background: linear-gradient(90deg, #14182b, #1a1f3a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.xp-bar-fill {
+  background: linear-gradient(90deg, #7c5cff 0%, #a78bfa 45%, #4ee1ff 100%);
+  background-size: 200% 100%;
+}
+
+.xp-bar-fill.is-max {
+  background: linear-gradient(90deg, #ffd257 0%, #ffb347 50%, #ff8a3d 100%);
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #eef0ff 0%, #fff 20%, #eef0ff 40%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-150 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100;
+}
+
+.btn-primary {
+  @apply btn bg-gradient-to-br from-violet-500 to-indigo-500 text-white shadow-glow hover:brightness-110;
+}
+
+.btn-secondary {
+  @apply btn bg-white/[0.06] text-slate-100 border border-white/10 hover:bg-white/[0.1];
+}
+
+.btn-gold {
+  @apply btn bg-gradient-to-br from-amber-400 to-orange-500 text-ink-950 shadow-gold hover:brightness-110;
+}
+
+.btn-danger {
+  @apply btn bg-white/[0.04] text-rose-300 border border-rose-500/20 hover:bg-rose-500/10;
+}
