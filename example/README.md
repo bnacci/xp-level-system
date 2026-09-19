@@ -25,6 +25,14 @@ Or manually:
 3. Set **Root Directory** to `example`.
 4. Deploy — no environment variables required.
 
+This example depends on `xp-level-system` via `file:..` (the parent package in this same
+repo) rather than the npm registry, so it always builds against the current source —
+including before a new version has been published. [`vercel.json`](./vercel.json) handles
+this automatically by building the parent package (`npm install && npm run build`) before
+installing the example's own dependencies; you don't need to configure anything manually.
+Once you've published your own version to npm, feel free to switch the dependency back to
+a semver range (e.g. `"xp-level-system": "^1.1.0"`) and drop `vercel.json`.
+
 ## What it demonstrates
 
 | Feature | Package API used |

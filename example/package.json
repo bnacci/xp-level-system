@@ -13,7 +13,7 @@
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "xp-level-system": "^1.1.0"
+    "xp-level-system": "file:.."
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
