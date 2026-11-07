@@ -61,8 +61,8 @@
     "clean": "node -e \"require(\\\"fs\\\").rmSync(\\\"dist\\\", {recursive:true,force:true})\""
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^2.0.0",
-    "typescript": "^5.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "typescript": "^5.9.3",
     "vitest": "^2.1.9"
   },
   "engines": {

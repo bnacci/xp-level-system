@@ -14,7 +14,7 @@ export function PlayerCard({
   return (
     <div className="panel rounded-2xl p-6 sm:p-8">
       <div className="flex flex-wrap items-center gap-5">
-        <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600/30 to-cyan-400/20 text-4xl ring-1 ring-white/10">
+        <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-violet-600/30 to-cyan-400/20 text-4xl ring-1 ring-white/10">
           🧙
           <span className="absolute -bottom-2 -right-2 flex h-8 min-w-8 items-center justify-center rounded-full border-2 border-ink-950 bg-violet-500 px-1 text-xs font-bold text-white shadow-glow">
             {info.level}

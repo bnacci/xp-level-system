@@ -1,0 +1,17 @@
+import type { ComponentPropsWithoutRef } from "react";
+
+/** The ascending steps are shared with app/icon.svg. */
+export function XPLogo(props: ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 64 64"
+      fill="none"
+      {...props}
+    >
+      <rect width="64" height="64" rx="18" fill="#6246d9" />
+      <path d="M12 44h10V34h10V24h10V14h10v20H42v10H32v10H12V44Z" fill="#fff" />
+      <path d="M42 14h10v10H42z" fill="#dbf59b" />
+    </svg>
+  );
+}
